@@ -1,12 +1,12 @@
 package com.example.demo.controllers;
 
-import com.example.demo.dtos.CreateCategoryRequestDto;
-import com.example.demo.dtos.CreateCategoryResponseDto;
-import com.example.demo.dtos.GetAllCategoryResponseDto;
+import com.example.demo.dtos.*;
 import com.example.demo.models.Category;
 import com.example.demo.services.CategoryService;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -20,26 +20,36 @@ public class CategoryController {
         private final CategoryService categoryService;
 
         public CategoryController(CategoryService categoryService) {
-            this.categoryService = categoryService;
+                this.categoryService = categoryService;
         }
 
-    @PostMapping("/")
-    public CreateCategoryResponseDto addCategory(@RequestBody CreateCategoryRequestDto createCategoryRequestDto) {
+    @PostMapping("")
+    public ResponseEntity<CreateCategoryResponseDto> addCategory(
+            @RequestBody CreateCategoryRequestDto createCategoryRequestDto)
+    {
 
-        CreateCategoryResponseDto createCategoryResponseDto = new CreateCategoryResponseDto();
         Category category = categoryService.createCategory(createCategoryRequestDto.toCategory());
-        return CreateCategoryResponseDto.toDto(category);
-
-
+        CreateCategoryResponseDto responseDto = CreateCategoryResponseDto.toDto(category);
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
     }
 
     @GetMapping("")
-    public GetAllCategoryResponseDto getAllCategories() {
+    public ResponseEntity<GetAllCategoryResponseDto> getAllCategories() {
 
             GetAllCategoryResponseDto getAllCategoryResponseDto = new GetAllCategoryResponseDto();
             List<Category> categoryList=categoryService.findAllCategory();
-            List<CreateCategoryResponseDto> responseDtoList=categoryList.stream().map(CreateCategoryResponseDto::toDto).collect(Collectors.toList());
-            getAllCategoryResponseDto.setCreateCategoryResponseDtoList(responseDtoList);
-            return getAllCategoryResponseDto;
+            List<GetCategoryResponseDto> responseDtoList=categoryList.stream().map(GetCategoryResponseDto::toDto).collect(Collectors.toList());
+            getAllCategoryResponseDto.setResponseDto(responseDtoList);
+            return ResponseEntity.status(HttpStatus.CREATED).body(getAllCategoryResponseDto);
+    }
+
+    @PatchMapping("")
+    public ResponseEntity<CreateCategoryResponseDto> updateCategory(
+            @RequestBody UpdateCategoryRequestDto updateCategoryRequestDto)
+    {
+        Category category = categoryService.updateCategory(updateCategoryRequestDto.toCategory());
+        CreateCategoryResponseDto responseDto =CreateCategoryResponseDto.toDto(category);
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
+
     }
 }

@@ -4,6 +4,8 @@ import com.example.demo.dtos.*;
 import com.example.demo.models.Product;
 import com.example.demo.services.ProductService;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -16,30 +18,28 @@ public class ProductController {
         private ProductService productService;
 
 
-        public ProductController(@Qualifier("databaseProductServiceImpl")ProductService productService) {
+        public ProductController(@Qualifier("fakeStoreProductServiceImpl")ProductService productService) {
             this.productService = productService;
         }
 
     @PostMapping("")
-    public CreateProductResponseDto createProduct(@RequestBody CreateProductRequestDto createProductRequestDto) {
-        CreateProductResponseDto createProductResponseDto = new CreateProductResponseDto();
-        try{
-            Product product = productService.createProduct(CreateProductRequestDto.toProduct(createProductRequestDto),createProductRequestDto.getCategoryId());
-            createProductResponseDto=CreateProductResponseDto.fromProduct(product);
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
+    public ResponseEntity<CreateProductResponseDto> createProduct(
+            @RequestBody CreateProductRequestDto createProductRequestDto) {
 
-        return createProductResponseDto;
+        Product product = productService.createProduct(
+                CreateProductRequestDto.toProduct(createProductRequestDto),
+                createProductRequestDto.getCategoryId());
+
+        CreateProductResponseDto responseDto = CreateProductResponseDto.fromProduct(product);
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
     }
 
     @GetMapping("")
-    public GetAllProductResponseDto getAllProducts()
+    public ResponseEntity<GetAllProductResponseDto> getAllProducts()
     {
         GetAllProductResponseDto getAllProductResponseDto = new GetAllProductResponseDto();
         List<CreateProductResponseDto> responseDtos = new ArrayList<>();
-        try{
+
             List<Product> products=productService.getAllProducts();
             for(Product product:products)
             {
@@ -48,11 +48,8 @@ public class ProductController {
 
             }
             getAllProductResponseDto.setCreateProductResponseDtoList(responseDtos);
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
-        return getAllProductResponseDto;
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(getAllProductResponseDto);
     }
 
     @PatchMapping("")

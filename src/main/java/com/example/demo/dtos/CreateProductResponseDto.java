@@ -16,6 +16,7 @@ public class CreateProductResponseDto {
 
     public static CreateProductResponseDto  fromProduct(Product product) {
         CreateProductResponseDto dto = new CreateProductResponseDto();
+        dto.setId(product.getId());
         dto.setTitle(product.getTitle());
         dto.setPrice(product.getPrice());
         dto.setDescription(product.getDescription());

@@ -2,8 +2,10 @@ package com.example.demo.services;
 
 import com.example.demo.dtos.FakeStoreCreateProductRequestDto;
 import com.example.demo.dtos.FakeStoreCreateProductResponseDto;
+import com.example.demo.dtos.FakeStoreUpdateProductRequestDto;
 import com.example.demo.exceptions.CategoryNotFoundException;
 import com.example.demo.models.Product;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -45,6 +47,25 @@ public class FakeStoreProductServiceImpl implements ProductService {
 
     @Override
     public Product updateProduct(Product product, Integer categoryId) throws CategoryNotFoundException {
-        return null;
+        FakeStoreUpdateProductRequestDto fakeStoreUpdateProductRequestDto = FakeStoreUpdateProductRequestDto.fromProduct(product);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        // ✅ Ensure URL is correctly formed
+        String url = "https://fakestoreapi.com/products/" + fakeStoreUpdateProductRequestDto.getId();
+
+        HttpEntity<FakeStoreUpdateProductRequestDto> entity = new HttpEntity<>(fakeStoreUpdateProductRequestDto, headers);
+
+        ResponseEntity<FakeStoreCreateProductResponseDto> response =
+                restTemplate.exchange(
+                        url,
+                        HttpMethod.PUT,
+                        entity,
+                        FakeStoreCreateProductResponseDto.class
+                );
+
+        return FakeStoreCreateProductResponseDto.toProduct(response.getBody());
     }
+
 }
