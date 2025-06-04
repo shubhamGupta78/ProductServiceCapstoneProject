@@ -1,4 +1,4 @@
-package com.example.demo.services;
+package com.example.demo.services.Product;
 
 import com.example.demo.exceptions.CategoryNotFoundException;
 import com.example.demo.models.Product;

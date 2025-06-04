@@ -1,6 +1,5 @@
-package com.example.demo.services;
+package com.example.demo.services.Category;
 
-import com.example.demo.dtos.CreateCategoryRequestDto;
 import com.example.demo.models.Category;
 
 import java.util.List;

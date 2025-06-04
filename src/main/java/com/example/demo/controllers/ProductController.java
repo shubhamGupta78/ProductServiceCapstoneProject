@@ -2,7 +2,7 @@ package com.example.demo.controllers;
 
 import com.example.demo.dtos.*;
 import com.example.demo.models.Product;
-import com.example.demo.services.ProductService;
+import com.example.demo.services.Product.ProductService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,7 @@ public class ProductController {
         private ProductService productService;
 
 
-        public ProductController(@Qualifier("fakeStoreProductServiceImpl")ProductService productService) {
+        public ProductController(@Qualifier("databaseProductServiceImpl")ProductService productService) {
             this.productService = productService;
         }
 
@@ -26,6 +26,7 @@ public class ProductController {
     public ResponseEntity<CreateProductResponseDto> createProduct(
             @RequestBody CreateProductRequestDto createProductRequestDto) {
 
+            System.out.println(createProductRequestDto.getCategoryId());
         Product product = productService.createProduct(
                 CreateProductRequestDto.toProduct(createProductRequestDto),
                 createProductRequestDto.getCategoryId());

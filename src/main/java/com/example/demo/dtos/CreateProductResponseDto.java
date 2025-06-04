@@ -12,6 +12,9 @@ public class CreateProductResponseDto {
     private String description;
     //private String category;
     private String image;
+    private String brand;
+    private String ram;
+    private Double rating;
 
 
     public static CreateProductResponseDto  fromProduct(Product product) {
@@ -22,6 +25,9 @@ public class CreateProductResponseDto {
         dto.setDescription(product.getDescription());
         //dto.setCategory(product.getCategory());
         dto.setImage(product.getImage());
+        dto.setBrand(product.getBrand());
+        dto.setRam(product.getRam());
+        dto.setRating(product.getRating());
 
         return dto;
 

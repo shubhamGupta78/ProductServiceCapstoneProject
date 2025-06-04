@@ -13,6 +13,7 @@ public class FakeStoreCreateProductRequestDto {
     private String image;
 
 
+
     public static FakeStoreCreateProductRequestDto  fromProduct(Product product) {
         FakeStoreCreateProductRequestDto dto = new FakeStoreCreateProductRequestDto();
         dto.setTitle(product.getTitle());

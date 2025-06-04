@@ -1,4 +1,4 @@
-package com.example.demo.services;
+package com.example.demo.services.Product;
 
 import com.example.demo.dtos.FakeStoreCreateProductRequestDto;
 import com.example.demo.dtos.FakeStoreCreateProductResponseDto;
@@ -9,7 +9,6 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 

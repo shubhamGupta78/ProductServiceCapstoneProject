@@ -11,6 +11,9 @@ public class UpdateProductRequestDto {
     private Double price;
     private String image;
     private int categoryId;
+    private String brand;
+    private String ram;
+    private Double rating;
 
 
     public static Product toProduct(UpdateProductRequestDto updateProductRequestDto) {
@@ -20,6 +23,11 @@ public class UpdateProductRequestDto {
         product.setTitle(updateProductRequestDto.getTitle());
         product.setDescription(updateProductRequestDto.getDescription());
         product.setPrice(updateProductRequestDto.getPrice());
+
+        product.setBrand(product.getBrand());
+        product.setRam(product.getRam());
+        product.setRating(product.getRating());
+
         return product;
     }
 }

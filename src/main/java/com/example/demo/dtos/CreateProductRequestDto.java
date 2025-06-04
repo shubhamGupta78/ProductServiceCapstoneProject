@@ -13,6 +13,9 @@ public class CreateProductRequestDto {
 
     private int categoryId;
     private String image;
+    private String brand;
+    private String ram;
+    private Double rating;
 
     public static Product toProduct(CreateProductRequestDto dto) {
         Product product = new Product();
@@ -21,6 +24,9 @@ public class CreateProductRequestDto {
         product.setDescription(dto.getDescription());
         //product.setCategory(dto.getCategory());
         product.setImage(dto.getImage());
+        product.setBrand(dto.getBrand());
+        product.setRam(dto.getRam());
+        product.setRating(dto.getRating());
         return product;
     }
 }

@@ -1,4 +1,4 @@
-package com.example.demo.services;
+package com.example.demo.services.Product;
 
 import com.example.demo.exceptions.CategoryNotFoundException;
 import com.example.demo.exceptions.ProductNotFoundException;
@@ -24,6 +24,7 @@ public class DatabaseProductServiceImpl implements ProductService {
     }
     @Override
     public Product createProduct(Product product,Integer categoryId) throws CategoryNotFoundException {
+        System.out.println("ds"+categoryId);
         Optional<Category> optionalCategory = categoryRepository.findCategory(categoryId);
         if(optionalCategory.isEmpty())
             throw new CategoryNotFoundException("Category not found");
@@ -63,6 +64,13 @@ public class DatabaseProductServiceImpl implements ProductService {
             updatedProduct.setImage(product.getImage());
         if(updatedProduct.getCategory().getId()!=category.getId())
             updatedProduct.setCategory(category);
+        if(product.getBrand()!=null)
+            updatedProduct.setBrand(product.getBrand());
+        if(product.getRam()!=null)
+            updatedProduct.setRam(product.getRam());
+        if(product.getRating()!=null)
+            updatedProduct.setRating(product.getRating());
+
 
         return productRepository.save(product);
     }

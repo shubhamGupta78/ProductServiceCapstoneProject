@@ -15,5 +15,8 @@ public class Product extends BaseModel {
     @ManyToOne
     private Category category;
     private String image;
+    private String brand;
+    private String ram;
+    private Double rating;
 
 }

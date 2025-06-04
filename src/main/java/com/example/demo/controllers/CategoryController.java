@@ -2,14 +2,11 @@ package com.example.demo.controllers;
 
 import com.example.demo.dtos.*;
 import com.example.demo.models.Category;
-import com.example.demo.services.CategoryService;
-import org.aspectj.lang.annotation.Pointcut;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.demo.services.Category.CategoryService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
