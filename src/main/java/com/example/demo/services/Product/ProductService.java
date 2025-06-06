@@ -12,5 +12,7 @@ public interface ProductService {
 
     public List<Product> getAllProducts();
 
+    public Product getProductById(Integer productId);
+
     public Product updateProduct(Product product,Integer categoryId) throws CategoryNotFoundException;
 }

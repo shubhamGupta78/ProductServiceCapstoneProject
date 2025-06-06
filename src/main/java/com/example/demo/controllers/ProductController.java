@@ -18,7 +18,7 @@ public class ProductController {
         private ProductService productService;
 
 
-        public ProductController(@Qualifier("databaseProductServiceImpl")ProductService productService) {
+        public ProductController(@Qualifier("fakeStoreProductServiceImpl")ProductService productService) {
             this.productService = productService;
         }
 
@@ -59,6 +59,14 @@ public class ProductController {
 
             Product product = productService.updateProduct(UpdateProductRequestDto.toProduct(updateProductRequestDto),updateProductRequestDto.getCategoryId());
             createProductResponseDto=CreateProductResponseDto.fromProduct(product);
+            return createProductResponseDto;
+    }
+
+    @GetMapping("/{productId}")
+    public CreateProductResponseDto getProduct(@PathVariable("productId") Integer productId) {
+            CreateProductResponseDto createProductResponseDto = new CreateProductResponseDto();
+            Product product =productService.getProductById(productId);
+            createProductResponseDto = CreateProductResponseDto.fromProduct(productService.getProductById(productId));
             return createProductResponseDto;
     }
 }

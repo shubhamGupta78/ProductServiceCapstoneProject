@@ -42,6 +42,11 @@ public class DatabaseProductServiceImpl implements ProductService {
     }
 
     @Override
+    public Product getProductById(Integer productId) {
+        return null;
+    }
+
+    @Override
     public Product updateProduct(Product product, Integer categoryId) throws CategoryNotFoundException {
 
 
