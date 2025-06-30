@@ -142,9 +142,9 @@ src/
 
 ## 🙋‍♂️ Author
 
-Hemant Kumar
+Shubham Gupta
 - **GitHub**: [ShubhamGupta78](https://github.com/shubhamGupta78/)
-- **LinkedIn**: [ShubhamGupta]([https://www.linkedin.com/in/hemant00/](https://www.linkedin.com/in/shubhamgupta0404/))
+- **LinkedIn**: [ShubhamGupta]([https://www.linkedin.com/in/hemant00/](https://www.linkedin.com/in/shubhamgupta0404/)
 
 ## 🌟 Show Your Support
 If you find this project useful, please consider showing your support:
